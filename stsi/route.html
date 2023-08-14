@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Define the available tickets as an adjacency list representation of the graph
+let tickets = {
+  Kiev: ['Prague'],
+  Prague: ['Zurich'],
+  Zurich: ['Amsterdam'],
+  Amsterdam: ['Barcelona'],
+  Barcelona: ['Berlin'],
+  Berlin: ['Kiev', 'Amsterdam'],
+};
+
+// Initialize variables
+let startCity = 'Kiev';
+let visited = new Set();
+let route = [];
+
+// Depth-First Search function
+function search(city) {
+  route.push(city);
+  visited.add(city);
+
+  if (tickets[city]) {
+    for (let nextCity of tickets[city]) {
+      if (!visited.has(nextCity)) {
+        search(nextCity);
+      }
+    }
+  }
+}
+
+// Start DFS from the starting city
+search(startCity);
+
+// Print the route
+console.log("Route:", route.join(' -> '));
+
+    </script>
+</body>
+</html>
